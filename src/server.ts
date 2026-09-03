@@ -43,6 +43,8 @@ function contentType(filePath: string): string {
 
 function serveStatic(req: http.IncomingMessage, res: http.ServerResponse): boolean {
   let urlPath = (req.url || "/").split("?")[0] || "/";
+  if (urlPath === "/lite" || urlPath === "/lite/") urlPath = "/index.html";
+  else if (urlPath.startsWith("/lite/")) urlPath = urlPath.slice("/lite".length) || "/index.html";
   if (urlPath === "/") urlPath = "/index.html";
   if (urlPath.includes("..")) {
     res.writeHead(400).end("Bad path");

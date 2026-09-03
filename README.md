@@ -2,7 +2,7 @@
 
 > ArmaraOS is a personal AI workspace where assistants can chat with you, complete tasks and run automations on your behalf.
 
-**ArmaraOS Lite** is a lighter consumer shell over a running [ArmaraOS](https://armaraos.com/download) daemon. It does **not** replace `armaraos` / `armaraos-cli`, and it does not modify those repos.
+**ArmaraOS Lite** is the consumer workspace for a running [ArmaraOS](https://armaraos.com/download) daemon. The CLI ships it at `/lite/`; this repo is the UI source used to update that embed.
 
 ## Why Lite exists
 
@@ -18,35 +18,35 @@ Primary navigation: **Home · Assistants · Automations · Activity · Settings*
 
 ## Requirements
 
-- Node.js 22+
-- A running ArmaraOS daemon (`armaraos start`), discovered via `~/.armaraos/daemon.json`
+- A running ArmaraOS daemon (`armaraos start` / the public installer)
+- Node.js 22+ only if you run this repo’s sidecar (`armaraos-lite`) for local UI work
 
 ## Install & run
 
-Lite sits on top of the same ArmaraOS CLI users already install from [armaraos.com/download](https://armaraos.com/download). It does not ship inside that installer yet.
-
-**1. Install and start ArmaraOS**
+Lite is included in the ArmaraOS CLI. After the public installer, the daemon serves it at **`/lite/`** — no separate Node install:
 
 ```bash
 # macOS / Linux / WSL
 curl -sSfL https://ainativelang.com/install.sh | sh
-armaraos start
-
-# Windows (PowerShell)
-# irm https://ainativelang.com/install.ps1 | iex
+armaraos dashboard            # http://127.0.0.1:4200/lite/
+armaraos dashboard --classic  # full operator UI at /
 ```
 
-**2. Install Lite from this repo** (Node.js 22+)
+This repo is the UI source. For local iteration without rebuilding the CLI:
 
 ```bash
+# 1. ArmaraOS daemon (already running from `armaraos start`)
+# 2. Node 22+ sidecar on :4210
 git clone https://github.com/sbhooley/armaraos-lite.git
 cd armaraos-lite
 npm install
-npm link          # optional — puts armaraos-lite on your PATH
-armaraos-lite     # or: npm start
+npm link
+armaraos-lite --lite
 ```
 
-By default opens the **Lite** workspace at **http://127.0.0.1:4210** (proxies `/api` to the daemon). You can also open the **classic** operator dashboard on the daemon URL.
+Copy a new UI into the CLI crate before a daemon release: `scripts/sync-lite-ui.sh` in [sbhooley/armara](https://github.com/sbhooley/armara).
+
+The sidecar still opens **http://127.0.0.1:4210** (proxies `/api` to the daemon) for local UI work. Production users use `armaraos dashboard` instead.
 
 ### Choose a dashboard
 
