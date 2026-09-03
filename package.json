@@ -1,0 +1,39 @@
+{
+  "name": "armaraos-lite",
+  "version": "0.1.0",
+  "description": "ArmaraOS Lite — a personal AI workspace shell over the ArmaraOS daemon",
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sbhooley/armaraos-lite.git"
+  },
+  "homepage": "https://github.com/sbhooley/armaraos-lite#readme",
+  "bugs": {
+    "url": "https://github.com/sbhooley/armaraos-lite/issues"
+  },
+  "bin": {
+    "armaraos-lite": "./bin/armaraos-lite.mjs"
+  },
+  "scripts": {
+    "start": "tsx src/cli.ts start",
+    "status": "tsx src/cli.ts status",
+    "chat": "tsx src/cli.ts chat",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/lite-lib.test.mjs scripts/lite-features.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1",
+    "tsx": "^4.19.3",
+    "ws": "^8.18.1"
+  },
+  "devDependencies": {
+    "@types/http-proxy": "^1.17.16",
+    "@types/node": "^22.13.10",
+    "@types/ws": "^8.18.0",
+    "typescript": "^5.8.2"
+  }
+}

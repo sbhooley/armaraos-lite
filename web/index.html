@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ArmaraOS Lite</title>
+  <link rel="stylesheet" href="/styles.css?v=daemon-graph-42" />
+</head>
+<body>
+  <div class="shell" id="shell">
+    <div id="app">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand">
+          <div class="brand-mark">A</div>
+          <div>
+            <div class="brand-name">ArmaraOS</div>
+            <div class="brand-sub">Lite workspace</div>
+          </div>
+        </div>
+        <nav class="nav" id="primary-nav" aria-label="Main">
+          <button type="button" class="nav-item active" data-page="home">
+            Home
+            <span class="nav-badge working" id="working-badge" hidden></span>
+          </button>
+          <button type="button" class="nav-item" data-page="assistants">Assistants</button>
+          <button type="button" class="nav-item" data-page="automations">Automations</button>
+          <button type="button" class="nav-item" data-page="activity">
+            Activity
+            <span class="nav-badge" id="approval-badge" hidden>0</span>
+          </button>
+          <button type="button" class="nav-item" data-page="settings">Settings</button>
+        </nav>
+        <div class="sidebar-footer" id="sidebar-footer">
+          <button type="button" class="chrome-toggle" id="status-toggle" aria-expanded="true" aria-controls="sidebar-footer-body">
+            Hide status
+          </button>
+          <div class="sidebar-footer-body" id="sidebar-footer-body">
+            <button type="button" class="nav-item nav-advanced" id="advanced-toggle" data-page="advanced">
+              Advanced
+              <span class="chevron" id="advanced-chevron">›</span>
+            </button>
+            <a class="full-dash-link" id="full-dashboard-link" href="#" target="_blank" rel="noopener">
+              Open full ArmaraOS dashboard
+            </a>
+            <div class="conn" id="conn-status">Checking daemon…</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main" id="main">
+        <!-- filled by app.js -->
+      </main>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/app.js?v=daemon-graph-42" type="module"></script>
+</body>
+</html>
