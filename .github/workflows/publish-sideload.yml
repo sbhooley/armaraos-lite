@@ -1,0 +1,31 @@
+name: Request dashboard sideload publish
+
+# Instant path: PAT with Actions dispatch on private sbhooley/armara
+# (repo secret ARMARA_DISPATCH_TOKEN). If unset, sbhooley/armara's hourly
+# dashboard-sideload cron overlays this repo's web/ and publishes anyway.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - '.github/workflows/publish-sideload.yml'
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    name: Dispatch lite-ui-publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify sbhooley/armara
+        env:
+          GH_TOKEN: ${{ secrets.ARMARA_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "ARMARA_DISPATCH_TOKEN is not set."
+            echo "Hourly cron on sbhooley/armara will overlay this repo and publish the dashboard sideload feed."
+            exit 0
+          fi
+          gh api repos/sbhooley/armara/dispatches -f event_type=lite-ui-publish
+          echo "Dispatched lite-ui-publish to sbhooley/armara."

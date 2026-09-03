@@ -46,6 +46,8 @@ armaraos-lite --lite
 
 Copy a new UI into the CLI crate before a daemon release: `scripts/sync-lite-ui.sh` in [sbhooley/armara](https://github.com/sbhooley/armara).
 
+Pushing `web/**` on this repo’s `main` asks Armara to rebuild the **dashboard sideload** zip (`https://ainativelang.com/downloads/armaraos/dashboard/latest.json`). Installed daemons (0.8.8+) pick that up without a new binary. Instant publish needs repo secret `ARMARA_DISPATCH_TOKEN` (dispatch to private `sbhooley/armara`); otherwise an hourly job on Armara overlays this tree.
+
 The sidecar still opens **http://127.0.0.1:4210** (proxies `/api` to the daemon) for local UI work. Production users use `armaraos dashboard` instead.
 
 ### Choose a dashboard
@@ -88,4 +90,4 @@ Flags: `--lite`, `--classic` / `--old`, `--choose`, `--remember`, `--port N`, `-
 
 ## Out of scope (v1)
 
-No new kernel, no edits to the original CLI/dashboard, no Tauri desktop, no full re-skin of operator surfaces.
+No new kernel, no full re-skin of classic operator surfaces. Lite ships inside the ArmaraOS CLI (`/lite/`); this repo is the UI source and sideload overlay.
